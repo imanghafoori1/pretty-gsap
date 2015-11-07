@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Basic Tween</title>
+    
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 1 ).to( {left:"632px"} ).start();
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 1, {left:"632px"});
+	<br/>
+	<br/>
+	<br/>
+	Promise me not to forget to .start() your animations.
+</p> 
+<div id="demo">
+
+	<div id="logo"></div>
+</div>
+<!--- The following scripts are necessary to do TweenLite tweens on CSS properties -->
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+
+<script>
+window.onload = function(){
+	var logo = document.getElementById("logo");
+	// TweenLite.to(logo, 1, {left:"632px"});
+	animate(logo)
+		.during(1)
+		.to({left:"632px"})
+		.start();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Event Callbacks</title>
+    
+<style>
+body{
+	background-color:#000;
+	color:#fff;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div id="logo"></div>
+</div>
+<div id="updateOutput"></div>
+<div id="completeOutput"></div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+<script>
+window.onload = function() {
+	var logo = document.getElementById("logo"),
+		updateOutput = document.getElementById("updateOutput"),
+		completeOutput = document.getElementById("completeOutput"),
+		updateCount = 0;
+		
+/*	TweenLite.to(logo, 2, {left:"300px", 
+		onUpdate:updateHandler, 
+		onComplete:completeHandler, 
+		onCompleteParams:["animation complete!"]});
+*/
+	animate(logo)
+		.during(2)
+		.to({left:"300px"})
+		.onUpdate(updateHandler)
+		.onComplete( completeHandler , ["animation complete!"] )
+		.start();
+		
+	function updateHandler() {
+		updateCount++;
+		updateOutput.innerHTML = "onUpdate fired " + updateCount;
+	}
+	
+	function completeHandler(message) {
+	    completeOutput.innerHTML = "onComplete fired <br/> completeParams = " + message;
+	}
+}
+</script>
+
+</body>
+</html>

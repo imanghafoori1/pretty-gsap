@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: From Tween</title>
+    
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+		animate(logo)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .during(1)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .from(	{opacity:0.2, left:"400px"}	 )<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .to(	{opacity:0.9, left:"200px"}  )<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .thenYoyo(2)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .easeInOut(Back)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; .start();
+		<br/>
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenMax.fromTo(logo, 1, {opacity:0.2, left:"400px"},{opacity:0.9, left:"200px",repeat:2, yoyo:true, ease:Back.easeInOut} );
+	
+		<br/>	<br/>
+		<br/>
+		
+		It knows when to use TweenLite and when to use TweenMax behind the scenes.
+		
+</p> 
+<div id="demo">
+	<div id="logo"></div>
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenMax.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+<script>
+window.onload = function() {
+	var logo = document.getElementById("logo");
+	// TweenMax.fromTo(logo, 1, {opacity:1, left:"300px"},{opacity:0.6, left:"200px",repeat:4,ease:Back.easeInOut});
+	animate(logo)
+		.during(1)
+		.from(	{opacity:0.2, left:"400px"}	 )
+		.to(	{opacity:0.9, left:"200px"}  )
+		.thenYoyo(2)
+		.easeInOut(Back)
+		.start();
+
+    
+}
+</script>
+
+</body>
+</html>

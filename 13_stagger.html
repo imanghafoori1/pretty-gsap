@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Stagger</title>
+    
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+.box {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float:left;
+}
+#red{
+	background-color: red;
+}
+#yellow{
+	background-color: yellow;
+}
+#green{
+	background-color: green;
+}
+#blue{
+	background-color: blue;
+}
+#pink{
+	background-color: pink;
+}
+#purple{
+	background-color: purple;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div class="box" id="red"></div>
+    <div class="box" id="yellow"></div>
+    <div class="box" id="green"></div>
+    <div class="box" id="blue"></div>
+    <div class="box" id="pink"></div>
+    <div class="box" id="purple"></div>
+</div>
+
+<!-- TweenMax includes TweenLite, TimelineLite, TimelineMax, EasePack,  RoundPropsPlugin and CSSPlugin -->
+<script type="text/javascript" src="js/lib/greensock/TweenMax.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+<script>
+window.onload = function() {
+	var red = document.getElementById("red"),
+		yellow = document.getElementById("yellow"),
+		green = document.getElementById("green"),
+		blue = document.getElementById("blue"),
+		pink = document.getElementById("pink"),
+		purple = document.getElementById("purple")
+	
+	var elements = [red, yellow, green, blue, pink, purple];
+
+//	TweenMax.staggerTo(elements, 0.5,  {scale:0.2, opacity:0.3}, 0.3);
+	animate(elements)
+		.during(0.5)
+		.stagger(0.3) // if you remove this line, it will automatically fallback to TweenLite behind the curtian.
+		.to( { scale:0.2 , opacity:0.3 } )
+		.easeOut(Back)
+		.start(1);
+}
+</script>
+
+</body>
+</html>

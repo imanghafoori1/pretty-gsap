@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: TimelineLite Syntax</title>
+
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 70px;
+	background-color: #333;
+	padding: 8px;
+}
+#demoBackground{
+	position:absolute;
+	background-color:#000;
+	overflow:hidden;
+	width:692px;
+	height:70px;
+	visibility:hidden;
+}
+#logo{
+	position:absolute;
+	background: url(img/logo_black.jpg) no-repeat;
+	height: 60px;
+	width: 60px;
+	top:6px;
+}
+#timelinelite{
+	position:absolute;
+	background: url(img/timelinelite.png) no-repeat;
+	left:50px;
+	top:16px;
+	width: 180px;
+	height: 33px;
+	overflow:hidden;
+}
+#tagline{
+	position:absolute;
+	left:236px;
+	top:24px;
+	width:306px;
+	height:26px;
+}
+#tagline span{
+	position:relative;
+	display:inline-block;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp;
+	tl = animate( logo ).during( 1 ).from( {left:"-=50px"} ).easeOut( Power2 )<br/>
+&nbsp; &nbsp; .then( ) <br/>  
+&nbsp; &nbsp; &nbsp; &nbsp;.animate( timelinelite ).during( 2 ).from( {width:"0px"} )<br/>
+&nbsp; &nbsp; .wait( 2 ).then( )
+      <br/>
+&nbsp; &nbsp; &nbsp; .animate( tagline ).during( 0.3 ).stagger( 0.1 ).from(	{top:"-=30px", rotation:"-40deg", alpha:0, scale:1.8} )<br/>
+&nbsp; &nbsp;.start( );	<br/>
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp;tl = new TimelineLite();<br/>
+	&nbsp; &nbsp; &nbsp;tl.from( logo, 2, {left:"-=50px", ease:Back.easeOut} );<br/>
+  	&nbsp; &nbsp; &nbsp;tl.from( timelinelite, 2, {width:"0px"} );<br/>
+  	&nbsp; &nbsp; &nbsp;tl.staggerFrom( tagline, 0.5, {top:"-=30px", rotation:"-40deg", alpha:0, scale:1.8} , '+=2' );
+	
+		<br/>
+		
+		<br/>
+		
+		calling .then() is optional and does nothing.(It is for the sake of readability)
+		
+</p> >
+<div id="demo">
+    <div id="demoBackground">
+		<div id="logo"></div>
+		<div id="timelinelite"></div>
+		<div id="tagline"><span><img src="img/whos_61x26.png" width="61" height="26"></span><span><img src="img/the_35x26.png" width="35" height="26"></span><span><img src="img/boss_51x26.png" width="51" height="26"></span><span><img src="img/of_27x26.png" width="27" height="26"></span><span><img src="img/your_49x26.png" width="49" height="26"></span><span><img src="img/tweens_83x26.png" width="83" height="26"></span>
+        </div>
+    </div>
+</div>
+<input type="button" id="restartBtn" value="restart()">
+
+<script type="text/javascript" src="js/lib/greensock/TweenMax.js"></script>
+<script src="js/lib/jquery/jquery-1.8.2.js"></script>
+<script src="js/pretty-gsap/pretty-gsap.js"></script>
+<script>
+$(window).load(function() {
+	var logo = $("#logo"),
+	    timelineLite = $("#timelinelite"),
+	    tagline = $("#tagline span"),
+		restartBtn = $("#restartBtn");
+	//  tl = new TimelineLite();
+	//	tl.from(logo, 2, {left:"-=60px", ease:Back.easeOut});
+  	//	tl.from(timelinelite, 2, {width:"0px", alpha:1});
+  	//  tl.staggerFrom(tagline, 0.5, {top:"-=30px", rotation:"-40deg", alpha:0, scale:1.8, ease:Back.easeOut} , 0.2);
+
+;
+	  tl =  animate(logo)
+				.during(1)
+				.from({left:"-=50px"})
+				.easeOut(Power2)
+		.then()  // calling .then() is optional and does nothing.(It is for the sake of readability)
+    		.animate(timelinelite)
+				.during(2)
+				.from({width:"0px"})
+		.wait(2)// waits for 2sec and then starts next animation...
+    		.animate(tagline)
+    			.during(0.3)
+    			.stagger(0.1)
+    			.from(	{top:"-=30px", rotation:"-40deg", alpha:0, scale:1.8}	)
+      			.start();
+
+	restartBtn.click(function() {
+		tl.restart();
+	});
+
+	//show the demoBackground div after DOM is ready and all images loaded
+	TweenLite.set($("#demoBackground"), {visibility:"visible"});
+});
+
+</script>
+
+</body>
+</html>

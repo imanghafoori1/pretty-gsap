@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: jQuery with GSAP JS</title>
+   
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+.box {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float:left;
+}
+#red{
+	background-color: red;
+} 
+#yellow{
+	background-color: yellow;
+} 
+#green{
+	background-color: green;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div class="box" id="red" class="box"></div>
+    <div class="box" id="yellow" class="box"></div>
+    <div class="box" id="green" class="box"></div>
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script src="js/lib/jquery/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+<script>
+$(document).ready(function() {
+	var boxes = $(".box");
+	
+	//TweenLite.to(boxes, 1, {scale:0.2, opacity:0.3});
+	animate(boxes)
+		.during(1)
+		.to({scale:0.2, opacity:0.3})
+		.start();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Animate Multiple Properties</title>
+
+<style>
+body {
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 70px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 150px;
+	height: 60px;
+	background: #90E500 url(img/logo_transparent.png) no-repeat;
+	background-position: 0px 4px;
+	color: #000;	
+	font-family: Arial, Helvetica, sans-serif;
+	border-bottomtom: solid #000 10px;
+}
+#logo p {
+	font-size:18px;
+	margin-top: 0px;
+	margin-left: 40px;
+	line-height: 58px;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+		animate( logo ).during( 2 ).to( {left:"542px", backgroundColor:"black", borderBottomColor:"#90e500", color:"white"} ).startNow();	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, {left:"542px", backgroundColor:"black", borderBottomColor:"#90e500", color:"white"});
+	
+		<br/>	<br/>
+		<br/>
+		
+		Anything you passed as 3th parameter to the Tweenlite.from() (or .to) method, you now can pass to .from() (or .to)
+		
+</p> 
+<div id="demo">
+	<div id="logo">
+    	<p>GreenSock</p>
+    </div> 
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+<script>
+
+window.onload = function() {
+	var logo = document.getElementById("logo");
+	// TweenLite.to(logo, 2, {left:"542px", backgroundColor:"black", borderBottomColor:"#90e500", color:"white"});
+	animate(logo)
+		.during(2)
+		.to({left:"542px", backgroundColor:"black", borderBottomColor:"#90e500", color:"white"})
+		.startNow();
+}
+</script>
+
+</body>
+</html>

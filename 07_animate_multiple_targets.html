@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Animate Multiple Targets</title>
+   
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+.box {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float:left;
+}
+#red{
+	background-color: red;
+}
+#yellow{
+	background-color: yellow;
+}
+#green{
+	background-color: green;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div class="box" id="red"></div>
+    <div class="box" id="yellow"></div>
+    <div class="box" id="green"></div>
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+<script>
+//we'll use a window.onload for simplicity, but typically it is best to use either jQuery's $(document).ready() or $(window).load() or cross-browser event listeners so that you're not limited to one.
+window.onload = function() {
+	var red = document.getElementById("red"),
+		yellow = document.getElementById("yellow"),
+		green = document.getElementById("green");
+		
+	//TweenLite.to([red, yellow, green], 1, {scale:0.2, opacity:0.3});
+	animate([red, yellow, green])
+		.during(1)
+		.to( {scale:0.2, opacity:0.3})
+		.startNow();
+}
+</script>
+
+</body>
+</html>

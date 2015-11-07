@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Delay</title>
+    
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 70px;
+	background-color: #333;
+	padding: 8px;
+}
+#bar{
+	background-color:#91e500; 
+	color:black; 
+	position:relative; 
+	width:60px; 
+	height:10px;
+	}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div id="bar"></div>
+	<div id="logo"></div> 
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+
+
+<script>
+window.onload = function() {
+	var logo = document.getElementById("logo"),
+		bar = document.getElementById("bar");
+	
+	//TweenLite.to(bar, 2, {width:"692px"});
+	animate(bar) .during(2).to( {width:"692px"}).start(2);
+	animate(logo).during(2).to( {left:"632px"} ).start(2);
+	//TweenLite.to(logo, 2, {left:"632px", delay:1});
+		
+		
+}
+</script>
+
+</body>
+</html>

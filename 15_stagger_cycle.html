@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color:#1d1d1d;
+  font-family: "Asap", sans-serif;
+  color:#989898;
+  margin:0 10px;
+  font-size:16px;
+}
+
+h1, h2, h3 {
+  font-family: "Signika Negative", sans-serif;
+  margin: 10px 0 10px 0;
+  color:#f3f2ef;
+}
+
+h1 { 
+  font-size:36px;
+}
+
+h2 {
+  font-size:30px;
+}
+
+h3 {
+  font-size:24px;
+}
+
+p{
+  line-height:22px;
+  margin-bottom:16px;
+  width:650px;
+}
+
+#demo {
+  height:100%;
+  position:relative;
+}
+.box {
+  width:50px;
+  height:50px;
+  position:relative;
+  border-radius:6px;
+  margin:4px;
+  display:inline-block;
+  background:grey;
+}
+
+.green{
+  background-color:#6fb936;
+}
+
+.orange {
+  background-color:#f38630;
+}
+.grey {
+  background-color:#989898;
+}
+
+#text {
+  background-color:#eee;
+  padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp;
+&nbsp;animate( '.box' )<br/> 
+&nbsp; &nbsp; &nbsp;    .during( 1 )<br/> 
+&nbsp; &nbsp; &nbsp;    .from( {left : '100px'} )<br/> 
+&nbsp; &nbsp; &nbsp;    .cycle(  'backgroundColor' , [ "yellow" , "green" , "#baf" ]  )<br/> 
+&nbsp; &nbsp; &nbsp;    .cycle( 'y', function( i ){<br/> 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return i * 40 + 10;<br/> 
+&nbsp; &nbsp; &nbsp;          })<br/> 
+&nbsp; &nbsp; &nbsp;    .to( {left : '200px'} )<br/> 
+&nbsp; &nbsp; &nbsp;     .cycle( 'backgroundColor' , ["red", "white", "#00f"] )<br/> 
+&nbsp; &nbsp; &nbsp;     .cycle( 'y' , function( i ){<br/> 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;              return i * 20;<br/> 
+&nbsp; &nbsp; &nbsp;})<br/> 
+&nbsp; &nbsp; &nbsp;    .stagger( 0.6 )<br/> 
+&nbsp; &nbsp; &nbsp;    .start( );  <br/> 
+  <br/> 
+  <br/> 
+  Instead of this :
+  <br/>
+ 
+  
+    <br/> <br/>
+    <br/>
+    
+   
+    
+</p> 
+
+
+
+
+<h2>TweenMax.staggerTo() with cycle</h2>
+<div id="demo">
+  <p>The cycle property allows you to define an array of values or function-based values in all stagger-based methods in TweenMax, TimelineLite and TimelineMax (see comments for full list).</p>
+   
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+</div>
+<script type="text/javascript" src="js/lib/greensock/TweenMax.js"></script>
+<script src="js/lib/jquery/jquery-1.8.2.js"></script>
+<script src="js/pretty-gsap/pretty-gsap.js"></script>
+<script type="text/javascript">
+	animate('.box')
+		.during(1)
+		.from({left : '100px'})
+		.cycle( 'backgroundColor' ,["yellow", "green", "#baf"] )
+		.cycle('y', function(i){
+
+       			return i * 40 + 10;
+    
+   				})
+
+		.to({left : '200px'})
+		 .cycle('backgroundColor' , ["red", "white", "#00f"])
+		 .cycle('y', function(i){
+	       			return i * 20;
+		    	 			})
+		.stagger(0.4)
+		.start();
+	// TweenMax.staggerFromTo(".box", 1,, , 0.5);
+
+/* The cycle property is available in:
+
+TweenMax.staggerFromTo()
+TweenMax.staggerFrom()
+TweenMax.staggerTo()
+TimelineLite.staggerFromTo()
+TimelineLite.staggerFrom()
+TimelineLite.staggerTo()
+TimelineMax.staggerFromTo()
+TimelineMax.staggerFrom()
+TimelineMax.staggerTo()
+
+*/
+</script>
+</body>
+</html>
+

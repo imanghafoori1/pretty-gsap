@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Repeat</title>
+    
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start( 2 ); 	
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut, delay:2 } );
+	
+		<br/>	<br/>
+		<br/>
+		
+		You can pass the `delay` seconds to the .start() method.
+		
+</p> 
+<div id="demo">
+	<div id="logo"></div>
+</div>
+
+<!-- TweenMax includes TweenLite, TimelineLite, TimelineMax, EasePack,  RoundPropsPlugin and CSSPlugin -->
+<script type="text/javascript" src="js/lib/greensock/TweenMax.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+<script>
+window.onload = function() {
+	var logo = document.getElementById("logo");
+	//TweenMax.to(logo, 1, {left:"300px", repeat:3, yoyo:true});
+
+	// This will automatically choose between TweenLite and TweenMax when needed.
+	animate(logo)
+		.during(1)
+		.to({left:"300px"})
+		.thenYoyo(3,1) 		// yoyo 3 times, with 1(sec) delay ( It will become total of 4 times. )
+		.startNow();  		// or you can call .start(0);
+
+// Also try this :
+
+/*	animate(logo)
+		.during(1)
+		.to({left:"300px"})
+		.thenRepeat(3,1) 		
+		.startNow();  		
+*/	
+}
+</script>
+
+</body>
+</html>

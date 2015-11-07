@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>GreenSock: Easing</title>
+
+<style>
+body{
+	background-color:#000;
+}
+#demo {
+	width: 692px;
+	height: 60px;
+	background-color: #333;
+	padding: 8px;
+}
+#easeWrapper {
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	border-right: 1px dashed #CCC;
+	border-left: 1px dashed #CCC;
+}
+#logo {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	background: url(img/logo_black.jpg) no-repeat;
+}
+#text {
+	background-color:#eee;
+	padding:13px;
+}
+</style>
+</head>
+
+<body>
+<p id='text'>
+Write this:
+<br/>
+&nbsp; &nbsp; &nbsp; 
+	animate( logo ).during( 2 ).to( {left:"440px"} ).easeOut( Back ).start();
+
+	<br/>	
+	<br/>	
+	<br/>	
+	Instead of this :
+	<br/>
+	&nbsp; &nbsp; &nbsp; TweenLite.to(logo, 2, { left:"440px", ease:Back.easeOut } );
+	
+		<br/>	<br/>
+		<br/>	<br/>
+		.easeInOut()<br/>
+		.easeIn()<br/>
+		are also available.
+		<br/>
+
+		<br/>
+		For some cases that none are the above applicable you can write:
+		<br/> 	&nbsp; &nbsp; &nbsp;
+		animate( logo ).during( 2 ).to( {left:"440px"} ).ease( SlowMo, 'ease' ).start(); 	
+		
+</p> 
+<div id="demo">
+	<div id="easeWrapper">
+		<div id="logo"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<!--- Be sure to load EasePack if you want to use a specific ease -->
+<script type="text/javascript" src="js/lib/greensock/easing/EasePack.min.js"></script>
+<script type="text/javascript" src="js/lib/greensock/TweenLite.min.js"></script>
+<script type="text/javascript" src="js/pretty-gsap/pretty-gsap.js"></script>
+
+
+<script>
+window.onload = function() {
+	var logo = document.getElementById("logo");
+
+
+	// TweenLite.to(logo, 2, {left:"440px", ease:Bounce.easeOut});
+	animate(logo)
+		.during(2)
+		.to({left:"440px"})
+		.easeOut(Back)	 //	.easeInOut(Back) 	.easeIn(Back)	
+		.start(); 		 // start with 2 sec delay.
+
+/* 
+	animate(logo)
+		.during(2)
+		.to({left:"440px"})
+		.ease(SlowMo,ease)
+		.start(2); 
+*/
+
+	/* Tip: Try substituting the following eases:
+	Elastic.easeIn
+	Elastic.easeInout
+	Back.easeOut
+	Power1.easeOut
+	Power2.easeOut
+	Power3.easeOut
+	Power4.easeOut
+	SlowMo.ease
+	*/
+}
+</script>
+
+</body>
+</html>
