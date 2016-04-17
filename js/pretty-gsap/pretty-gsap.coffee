@@ -1,24 +1,24 @@
-TweenMax     = false    if TweenMax     is `undefined`
+TweenMax = false    if TweenMax is `undefined`
 TimelineLite = false    if TimelineLite is `undefined`
-TweenLite    = false    if TweenLite    is `undefined`
+TweenLite = false    if TweenLite is `undefined`
 
 #noinspection JSUnresolvedVariable
 ((window, TweenLite, TweenMax, TimelineLite) ->
-    #///////////////////private-helpers-functions//////////////////////
+#///////////////////private-helpers-functions//////////////////////
     _mergeObjs = (obj1, obj2) ->
         for attrName of obj2
             obj1[attrName] = obj2[attrName]
         return
 
     _ucfirst = (string) ->
-        #Makes The First Letter Uppercase
+#Makes The First Letter Uppercase
         string.charAt(0).toUpperCase() + string.slice(1)
 
 
     _setStartAfter = () ->
         @_currentAnimation.startAfter1 = @_currentAnimation.startAfter2
 
-    _setAnimator = (animator) ->
+    _setGsapAnimator = (animator) ->
         @_gsapObj = animator
 
     _registerAnimation = () ->
@@ -54,17 +54,15 @@ TweenLite    = false    if TweenLite    is `undefined`
         delete @_currentAnimation.staggerTime
 
     _startRegisteredAnimations = (config) ->
-        # this is for the last animation in the timeline ( before .start() )
+# this is for the last animation in the timeline ( before .start() )
         animations = @_animationsQueue
         animatorObj = @_gsapObj
         if animations.length > 1
             animatorObj = new TimelineLite(config)
         i = 0
         while i < animations.length
-            inputArr   = animations[i][0]
+            inputArr = animations[i][0]
             methodName = animations[i][1]
-            # console.log inputArr, i, methodName, animations.length, animatorObj
-            console.log(inputArr, methodName)
             tween = animatorObj[methodName].apply(animatorObj, inputArr)
             i++
         tween
@@ -77,8 +75,8 @@ TweenLite    = false    if TweenLite    is `undefined`
         @_animationsQueue = []
         @
 
-    PrettyGSAP::setElement = (el) ->
-        @_currentAnimation.el = el
+    PrettyGSAP::setElement = (element) ->
+        @_currentAnimation.el = element
         @
 
     PrettyGSAP::during = (duration) ->
@@ -144,9 +142,9 @@ TweenLite    = false    if TweenLite    is `undefined`
         @_currentAnimation.config.onCompleteParams = params
         @
 
-    #//////////////////////////////////////////////////////////
+    #/////////////////////-End-Callbacks-////////////////////////
 
-    #//////////////////////////-Start()-///////////////////////
+    #///////////////////////-Start()-///////////////////////
     PrettyGSAP::startNow = ->
         @start(0)
 
@@ -156,16 +154,16 @@ TweenLite    = false    if TweenLite    is `undefined`
     #////////////////////////////////////////////////////
 
     #/////////////////////-Repeat-/////////////////////
-    PrettyGSAP::thenYoyoForever = (delaySec=0) ->
+    PrettyGSAP::thenYoyoForever = (delaySec = 0) ->
         @thenYoyo(-1, delaySec)
         @
 
-    PrettyGSAP::thenYoyo = (n=-1, delaySec=0) ->
+    PrettyGSAP::thenYoyo = (n = -1, delaySec = 0) ->
         @thenRepeat(n, delaySec, true)
         @
 
-    PrettyGSAP::thenRepeat = (n, delaySec=0, yoyo=false) ->
-        _setAnimator.call(@,TweenMax)
+    PrettyGSAP::thenRepeat = (n, delaySec = 0, yoyo = false) ->
+        _setGsapAnimator.call(@, TweenMax)
         @_currentAnimation.config.repeat = n
         @repeatDelay(delaySec) if delaySec
         @_currentAnimation.config.yoyo = yoyo if yoyo
@@ -175,7 +173,7 @@ TweenLite    = false    if TweenLite    is `undefined`
         @_currentAnimation.config.repeatDelay = sec
         @
 
-  #///////////////////////-easing-////////////////////////
+    #///////////////////////-easing-////////////////////////
     PrettyGSAP::easeIn = (easeObj) ->
         @ease(easeObj, 'easeIn')
         @
@@ -194,14 +192,14 @@ TweenLite    = false    if TweenLite    is `undefined`
 
     #/////////////////////////////////////////////////
     PrettyGSAP::stagger = (stagger) ->
-        _setAnimator.call(@,TweenMax)
+        _setGsapAnimator.call(@, TweenMax)
         @_tweenMax = true
         @_currentAnimation.staggerTime = stagger
         @
 
     PrettyGSAP::wait = (pauseTime) ->
         startAfter = "+=" + pauseTime if pauseTime > 0
-        startAfter = "-=" + (pauseTime*-1) if pauseTime < 0
+        startAfter = "-=" + (pauseTime * -1) if pauseTime < 0
         @_currentAnimation.startAfter1 = @_currentAnimation.startAfter2
         @_currentAnimation.startAfter2 = startAfter
         @
@@ -210,22 +208,22 @@ TweenLite    = false    if TweenLite    is `undefined`
         @
 
     # This is executed in when animte is called in the middle of the chain.
-    PrettyGSAP::animate = (el,disabled=false) ->
+    PrettyGSAP::animate = (el, disabled = false) ->
         _registerAnimation.call(@)
         @_currentAnimation.isDisabled = true if disabled
         @_currentAnimation.el = el
         @
 
     PrettyGSAP::_animate = (el) ->
-        @animate(el,true)
+        @animate(el, true)
 
     # This is executed only when animate is called as the first function in the chain.
     # the user can disable the animation with putting an extra underscore for easier debug
     _animate = (el) ->
-        animate(el,true)
+        animate(el, true)
 
     # This is executed only when animate is called as the first function in the chain.
-    animate = (el,disabled) ->
+    animate = (el, disabled) ->
         animator = new PrettyGSAP()
         animator.setElement(el)
         if disabled
@@ -233,7 +231,7 @@ TweenLite    = false    if TweenLite    is `undefined`
         animator
 
     PrettyGSAP::start = (delay, config) ->
-        #@_animation.startAfter1 = @_animation.startAfter2
+#@_animation.startAfter1 = @_animation.startAfter2
         _registerAnimation.call(@)
         _startRegisteredAnimations.call(@)
 
@@ -245,6 +243,4 @@ TweenLite    = false    if TweenLite    is `undefined`
 
     # Exposing the animate() object to the global space.(while hiding the rest)
     window.animate = animate
-    window._animate = _animate
-
-) window, TweenLite, TweenMax, TimelineLite
+    window._animate = _animate) window, TweenLite, TweenMax, TimelineLite

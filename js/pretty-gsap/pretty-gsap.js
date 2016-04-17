@@ -14,7 +14,7 @@ if (TweenLite === undefined) {
 }
 
 (function(window, TweenLite, TweenMax, TimelineLite) {
-  var PrettyGSAP, _animate, _mergeObjs, _registerAnimation, _setAnimator, _setStartAfter, _startRegisteredAnimations, _ucfirst, animate;
+  var PrettyGSAP, _animate, _mergeObjs, _registerAnimation, _setGsapAnimator, _setStartAfter, _startRegisteredAnimations, _ucfirst, animate;
   _mergeObjs = function(obj1, obj2) {
     var attrName;
     for (attrName in obj2) {
@@ -27,7 +27,7 @@ if (TweenLite === undefined) {
   _setStartAfter = function() {
     return this._currentAnimation.startAfter1 = this._currentAnimation.startAfter2;
   };
-  _setAnimator = function(animator) {
+  _setGsapAnimator = function(animator) {
     return this._gsapObj = animator;
   };
   _registerAnimation = function() {
@@ -78,7 +78,6 @@ if (TweenLite === undefined) {
     while (i < animations.length) {
       inputArr = animations[i][0];
       methodName = animations[i][1];
-      console.log(inputArr, methodName);
       tween = animatorObj[methodName].apply(animatorObj, inputArr);
       i++;
     }
@@ -92,8 +91,8 @@ if (TweenLite === undefined) {
     this._animationsQueue = [];
     return this;
   };
-  PrettyGSAP.prototype.setElement = function(el) {
-    this._currentAnimation.el = el;
+  PrettyGSAP.prototype.setElement = function(element) {
+    this._currentAnimation.el = element;
     return this;
   };
   PrettyGSAP.prototype.during = function(duration) {
@@ -190,7 +189,7 @@ if (TweenLite === undefined) {
     if (yoyo == null) {
       yoyo = false;
     }
-    _setAnimator.call(this, TweenMax);
+    _setGsapAnimator.call(this, TweenMax);
     this._currentAnimation.config.repeat = n;
     if (delaySec) {
       this.repeatDelay(delaySec);
@@ -221,7 +220,7 @@ if (TweenLite === undefined) {
     return this;
   };
   PrettyGSAP.prototype.stagger = function(stagger) {
-    _setAnimator.call(this, TweenMax);
+    _setGsapAnimator.call(this, TweenMax);
     this._tweenMax = true;
     this._currentAnimation.staggerTime = stagger;
     return this;
