@@ -68,7 +68,8 @@ describe 'pretty-gsap', ->
       animate('#el').during(111).from(left: '0px').to(left: '100px').stagger(333).easeIn(Back).startNow()
 
       expect(TweenMax.staggerFromTo).toHaveBeenCalledWith '#el', 111,
-        {left: '0px'}
+        {left: '0px'
+        ease: Back.easeIn}
       ,
         {left: '100px'
         ease: Back.easeIn}

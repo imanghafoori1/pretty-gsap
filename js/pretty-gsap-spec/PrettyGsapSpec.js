@@ -109,7 +109,8 @@ describe('pretty-gsap', function() {
         left: '100px'
       }).stagger(333).easeIn(Back).startNow();
       return expect(TweenMax.staggerFromTo).toHaveBeenCalledWith('#el', 111, {
-        left: '0px'
+        left: '0px',
+        ease: Back.easeIn
       }, {
         left: '100px',
         ease: Back.easeIn
